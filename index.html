@@ -5,226 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pour Toi 🌚</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: linear-gradient(135deg, #ffeef8 0%, #f0f8ff 100%);
       font-family: 'Comic Sans MS', cursive, sans-serif;
       height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      cursor: default;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow: hidden; cursor: default;
     }
 
-    .container {
-      text-align: center;
-      position: relative;
-      max-width: 90vw;
-    }
+    .container { text-align: center; position: relative; max-width: 90vw; }
 
     /* PERSONNAGE */
     .character {
-      width: 250px;
-      height: 280px;
-      margin: 0 auto 30px auto;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 250px; height: 280px; margin: 0 auto 30px auto;
+      cursor: pointer; transition: all 0.3s ease;
+      position: relative; display: flex; align-items: center; justify-content: center;
     }
-    .character:hover {
-      transform: scale(1.05);
-    }
-    .character.clicked {
-      animation: bounce 0.6s ease;
-    }
-    .character.happy {
-      animation: wiggle 0.5s ease;
-    }
+    .character:hover { transform: scale(1.05); }
+    .character.clicked { animation: bounce 0.6s ease; }
+    .character.happy { animation: wiggle 0.5s ease; }
+
     .character-video {
-      width: 220px;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      width: 220px; height: 220px; object-fit: cover; border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;
     }
 
     /* COMPTEUR */
     .counter {
-      position: absolute;
-      top: 10px;
-      right: 30px;
+      position: absolute; top: 10px; right: 30px;
       background: rgba(255, 255, 255, 0.8);
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 14px;
-      color: #666;
-      border: 1px solid #ddd;
+      padding: 10px 15px; border-radius: 20px; font-size: 14px; color: #666; border: 1px solid #ddd;
       z-index: 1000;
     }
 
     /* MESSAGE + VOCAL */
     .message-area {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 20px;
+      display: flex; align-items: flex-start; justify-content: center;
+      gap: 30px; margin-top: 20px;
     }
+
     .message {
-      background: white;
-      padding: 20px 25px;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      border: 2px solid #bbb;
-      max-width: 400px;
-      position: relative;
-      opacity: 0;
-      transform: translateY(20px) scale(0.8);
-      transition: all 0.5s ease;
+      background: white; padding: 20px 25px; border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1); border: 2px solid #bbb;
+      max-width: 400px; position: relative; opacity: 0;
+      transform: translateY(20px) scale(0.8); transition: all 0.5s ease;
     }
-    .message.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+    .message.show { opacity: 1; transform: translateY(0) scale(1); }
+
     .message::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
+      content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent;
       border-bottom: 15px solid #bbb;
     }
     .message::after {
-      content: '';
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 13px solid transparent;
-      border-right: 13px solid transparent;
+      content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0; border-left: 13px solid transparent; border-right: 13px solid transparent;
       border-bottom: 13px solid white;
     }
-    .message-text {
-      color: #555;
-      font-size: 18px;
-      line-height: 1.4;
-    }
-    .italian {
-      font-weight: bold;
-      color: #333;
-      display: block;
-      margin-bottom: 8px;
-    }
-    .french {
-      color: #666;
-      display: block;
-    }
+
+    .message-text { color: #555; font-size: 18px; line-height: 1.4; }
+    .italian { font-weight: bold; color: #333; display: block; margin-bottom: 8px; }
+    .french  { color: #666; display: block; }
 
     /* NOTE VOCALE */
     .voice-box {
-      display: flex;
-      align-items: center;
-      background: #e1ffc7;
-      border-radius: 25px;
-      padding: 10px 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      cursor: pointer;
-      width: 200px;
-      transition: background 0.3s;
-      position: relative;
+      display: flex; align-items: center; background: #e1ffc7; border-radius: 25px;
+      padding: 10px 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      cursor: pointer; width: 200px; transition: background 0.3s;
+      position: relative; /* à droite des messages via flex */
     }
-    .voice-icon {
-      font-size: 18px;
-      margin-right: 10px;
-    }
-    .voice-bar {
-      flex: 1;
-      height: 6px;
-      background: #ddd;
-      border-radius: 3px;
-      overflow: hidden;
-      margin-right: 10px;
-    }
-    .voice-bar-inner {
-      width: 0%;
-      height: 100%;
-      background: #4caf50;
-      transition: width 0.2s linear;
-    }
-    .voice-duration {
-      font-size: 12px;
-      color: #555;
-    }
+    .voice-icon { font-size: 18px; margin-right: 10px; }
+    .voice-bar  { flex: 1; height: 6px; background: #ddd; border-radius: 3px; overflow: hidden; margin-right: 10px; }
+    .voice-bar-inner { width: 0%; height: 100%; background: #4caf50; transition: width 0.2s linear; }
+    .voice-duration { font-size: 12px; color: #555; }
 
     /* ANIMATIONS */
-    @keyframes wiggle {
-      0%,100% {transform:rotate(0deg) scale(1);}
-      25% {transform:rotate(-5deg) scale(1.05);}
-      75% {transform:rotate(5deg) scale(1.05);}
-    }
-    @keyframes bounce {
-      0%,20%,60%,100% {transform:translateY(0) scale(1);}
-      40% {transform:translateY(-20px) scale(1.1);}
-      80% {transform:translateY(-10px) scale(1.05);}
-    }
-    .heart {
-      position: absolute;
-      font-size: 20px;
-      animation: floatHeart 3s ease-out forwards;
-      pointer-events: none;
-    }
-    @keyframes floatHeart {
-      0% {opacity:1; transform:translateY(0) scale(0);}
-      20% {transform:translateY(-20px) scale(1);}
-      100% {opacity:0; transform:translateY(-100px) scale(0.5);}
-    }
+    @keyframes wiggle { 0%,100%{transform:rotate(0deg) scale(1);} 25%{transform:rotate(-5deg) scale(1.05);} 75%{transform:rotate(5deg) scale(1.05);} }
+    @keyframes bounce { 0%,20%,60%,100%{transform:translateY(0) scale(1);} 40%{transform:translateY(-20px) scale(1.1);} 80%{transform:translateY(-10px) scale(1.05);} }
+    .heart { position: absolute; font-size: 20px; animation: floatHeart 3s ease-out forwards; pointer-events: none; }
+    @keyframes floatHeart { 0%{opacity:1;transform:translateY(0) scale(0);} 20%{transform:translateY(-20px) scale(1);} 100%{opacity:0; transform:translateY(-100px) scale(0.5);} }
 
     /* MOBILE */
     @media(max-width:600px){
-      .character {
-        width: 180px;
-        height: 200px;
-      }
-      .character-video {
-        width: 160px;
-        height: 160px;
-      }
-      .message-area {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
-      .message {
-        max-width: 95vw;
-        padding: 15px 18px;
-        font-size: 16px;
-      }
-      .voice-box {
-        width: 90%;
-        max-width: 280px;
-      }
+      .character { width: 180px; height: 200px; }
+      .character-video { width: 160px; height: 160px; }
+
+      .message-area { flex-direction: column; align-items: center; gap: 15px; }
+      .message { max-width: 95vw; padding: 15px 18px; font-size: 16px; }
+
+      .voice-box { width: 90%; max-width: 280px; }
+
       .counter {
-        top: -5px;   /* plus haut */
-        right: 10px; /* plus collé au bord */
-        font-size: 12px;
-        padding: 6px 10px;
+        top: -5px;    /* remonte pour éviter le perso */
+        right: 10px;  /* bien collé au bord droit */
+        font-size: 12px; padding: 6px 10px;
       }
     }
   </style>
@@ -252,6 +128,7 @@
           <span class="french">Salut ! Prêt pour les messages ? 🌚</span>
         </p>
       </div>
+
       <div class="voice-box" id="voiceBox">
         <span class="voice-icon">🎤</span>
         <div class="voice-bar"><div class="voice-bar-inner" id="voiceBar"></div></div>
@@ -279,11 +156,16 @@
     ];
 
     let currentMessageIndex = 0;
-    const character = document.getElementById('character');
-    const messageBox = document.getElementById('messageBox');
+
+    const character   = document.getElementById('character');
+    const messageBox  = document.getElementById('messageBox');
     const messageText = document.getElementById('messageText');
-    const messageCount = document.getElementById('messageCount');
+    const messageCount= document.getElementById('messageCount');
     const totalMessages = document.getElementById('totalMessages');
+
+    // 👉 Rendez la première phrase visible au chargement
+    messageBox.classList.add('show');
+
     totalMessages.textContent = messages.length;
 
     function createSymbol() {
@@ -291,7 +173,7 @@
       symbol.className = 'heart';
       symbol.innerHTML = '🌚';
       symbol.style.left = (Math.random() * 100) + '%';
-      symbol.style.top = '50%';
+      symbol.style.top  = '50%';
       document.body.appendChild(symbol);
       setTimeout(() => symbol.remove(), 3000);
     }
@@ -302,6 +184,7 @@
         currentMessageIndex = 0;
         return;
       }
+
       messageBox.classList.remove('show');
       setTimeout(() => {
         messageText.innerHTML = `
@@ -310,8 +193,10 @@
         `;
         messageCount.textContent = currentMessageIndex + 1;
         messageBox.classList.add('show');
+
         character.classList.add('happy');
         setTimeout(() => character.classList.remove('happy'), 2000);
+
         currentMessageIndex++;
       }, 250);
     }
@@ -319,33 +204,29 @@
     character.addEventListener('click', function() {
       character.classList.add('clicked');
       setTimeout(() => character.classList.remove('clicked'), 600);
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => createSymbol(), i * 200);
-      }
+
+      for (let i = 0; i < 3; i++) setTimeout(() => createSymbol(), i * 200);
       setTimeout(() => showNextMessage(), 300);
     });
 
     character.addEventListener('dblclick', function() {
-      for (let i = 0; i < 6; i++) {
-        setTimeout(() => createSymbol(), i * 100);
-      }
+      for (let i = 0; i < 6; i++) setTimeout(() => createSymbol(), i * 100);
     });
 
     // 🎤 Lecture du vocal
     const voiceBox = document.getElementById('voiceBox');
-    const voice = document.getElementById('voice');
+    const voice    = document.getElementById('voice');
     const voiceBar = document.getElementById('voiceBar');
 
     voiceBox.addEventListener('click', () => {
       if (voice.paused) {
         voice.play();
-        let duration = voice.duration || 5;
-        voiceBar.style.width = '0%';
-        const interval = setInterval(() => {
-          if (voice.paused || voice.ended) {
-            clearInterval(interval);
+        const update = setInterval(() => {
+          if (voice.ended || voice.paused) {
+            clearInterval(update);
             voiceBar.style.width = '0%';
           } else {
+            const duration = voice.duration || 5;
             voiceBar.style.width = ((voice.currentTime / duration) * 100) + '%';
           }
         }, 200);
