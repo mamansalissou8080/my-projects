@@ -21,7 +21,7 @@ body {
 .container { text-align:center; position:relative; max-width:90vw; }
 
 .character {
-    width:250px; height:280px; margin:0 auto;
+    width:250px; height:280px; margin:0 auto 30px auto;
     cursor:pointer; transition:all 0.3s ease;
     display:flex; align-items:center; justify-content:center; position:relative;
 }
@@ -37,8 +37,9 @@ body {
     align-items:flex-start;
     justify-content:center;
     margin-top:20px;
-    gap:50px; 
+    gap:20px; 
     flex-wrap:wrap;
+    position:relative; /* pour positionner la zone vocale à droite */
 }
 
 .message {
@@ -51,17 +52,6 @@ body {
 
 .message.show { opacity:1; transform:translateY(0) scale(1); }
 
-.message::before {
-    content:''; position:absolute; top:-10px; left:50%; transform:translateX(-50%);
-    border-left:15px solid transparent; border-right:15px solid transparent;
-    border-bottom:15px solid #bbb;
-}
-.message::after {
-    content:''; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
-    border-left:13px solid transparent; border-right:13px solid transparent;
-    border-bottom:13px solid white;
-}
-
 .message-text { font-size:18px; line-height:1.4; }
 .message-text .italian { display:block; font-weight:bold; color:#222; margin-bottom:5px; }
 .message-text .french { display:block; color:#555; font-size:16px; }
@@ -70,10 +60,9 @@ body {
     display:flex; align-items:center; background:#e1ffc7; border-radius:25px;
     padding:10px 15px; box-shadow:0 3px 10px rgba(0,0,0,0.1);
     cursor:pointer; width:200px; transition:background 0.3s;
-    position:absolute; /* fixe */
-    top:50px; 
-    right:calc(50% - 150px); /* alignée par rapport au personnage */
-    z-index:1000;
+    position:absolute; /* position par rapport à message-area */
+    top:0;
+    left:calc(100% + 20px); /* à droite des messages */
 }
 
 .voice-box.playing { background:#b3ff8a; }
@@ -89,8 +78,8 @@ body {
 
 .counter {
     position:absolute; 
-    top:50px; 
-    right:calc(50% - 380px); /* juste à gauche de la note vocale */
+    top:30px; 
+    right:-60px; 
     background: rgba(255, 255, 255, 0.8);
     padding: 10px 15px;
     border-radius: 20px;
@@ -111,8 +100,8 @@ body {
     .character-video{width:180px;height:180px;}
     .message{max-width:90vw;padding:15px 20px;}
     .message-text{font-size:16px;}
-    .voice-box{width:180px; right:calc(50% - 120px);}
-    .counter{right:calc(50% - 320px);}
+    .voice-box{width:180px; left:calc(100% + 10px);}
+    .counter{top:5px; right:5px;}
 }
 </style>
 </head>
