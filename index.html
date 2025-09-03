@@ -70,6 +70,10 @@ body {
     display:flex; align-items:center; background:#e1ffc7; border-radius:25px;
     padding:10px 15px; box-shadow:0 3px 10px rgba(0,0,0,0.1);
     cursor:pointer; width:200px; transition:background 0.3s;
+    position:absolute; /* fixe */
+    top:50px; 
+    right:calc(50% - 150px); /* alignée par rapport au personnage */
+    z-index:1000;
 }
 
 .voice-box.playing { background:#b3ff8a; }
@@ -81,21 +85,19 @@ body {
     height:5px; flex:1; background:#ddd; border-radius:5px; overflow:hidden;
     position:relative; margin-left:10px;
 }
-.voice-bar-inner {
-    width:0%; height:100%; background:#76c700; transition:width 0.1s linear;
-}
+.voice-bar-inner { width:0%; height:100%; background:#76c700; transition:width 0.1s linear; }
 
 .counter {
     position:absolute; 
-    top:50px; left:calc(50% + 150px);
-    transform:translateX(0);
+    top:50px; 
+    right:calc(50% - 380px); /* juste à gauche de la note vocale */
     background: rgba(255, 255, 255, 0.8);
     padding: 10px 15px;
     border-radius: 20px;
     font-size: 14px;
     color: #666;
     border: 1px solid #ddd;
-    z-index: 1000;
+    z-index:1000;
 }
 
 @keyframes wiggle { 0%,100%{transform:rotate(0deg) scale(1);} 25%{transform:rotate(-5deg) scale(1.05);} 75%{transform:rotate(5deg) scale(1.05);} }
@@ -109,8 +111,8 @@ body {
     .character-video{width:180px;height:180px;}
     .message{max-width:90vw;padding:15px 20px;}
     .message-text{font-size:16px;}
-    .voice-box{width:180px;}
-    .counter{left:calc(50% + 100px);}
+    .voice-box{width:180px; right:calc(50% - 120px);}
+    .counter{right:calc(50% - 320px);}
 }
 </style>
 </head>
