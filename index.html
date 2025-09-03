@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pour Toi 🌚</title>
+  <title>Holà 🌚</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -34,10 +34,11 @@
 
     /* COMPTEUR */
     .counter {
-      position: absolute; top: 10px; right: 30px;
+      position: fixed; /* 👉 fixé pour qu'il ne bouge jamais */
+      top: 10px; right: 20px;
       background: rgba(255, 255, 255, 0.8);
       padding: 10px 15px; border-radius: 20px; font-size: 14px; color: #666; border: 1px solid #ddd;
-      z-index: 1000;
+      z-index: 2000;
     }
 
     /* MESSAGE + VOCAL */
@@ -74,7 +75,7 @@
       display: flex; align-items: center; background: #e1ffc7; border-radius: 25px;
       padding: 10px 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       cursor: pointer; width: 200px; transition: background 0.3s;
-      position: relative; /* à droite des messages via flex */
+      position: relative;
     }
     .voice-icon { font-size: 18px; margin-right: 10px; }
     .voice-bar  { flex: 1; height: 6px; background: #ddd; border-radius: 3px; overflow: hidden; margin-right: 10px; }
@@ -97,11 +98,7 @@
 
       .voice-box { width: 90%; max-width: 280px; }
 
-      .counter {
-        top: -5px;    /* remonte pour éviter le perso */
-        right: 10px;  /* bien collé au bord droit */
-        font-size: 12px; padding: 6px 10px;
-      }
+      .counter { top: 5px; right: 10px; font-size: 12px; padding: 6px 10px; }
     }
   </style>
 </head>
@@ -124,8 +121,7 @@
     <div class="message-area">
       <div class="message" id="messageBox">
         <p class="message-text" id="messageText">
-          <span class="italian">Ciao! Pronto per i messaggi? 🌚</span>
-          <span class="french">Salut ! Prêt pour les messages ? 🌚</span>
+          <span class="italian">Clique ici 🌚</span>
         </p>
       </div>
 
@@ -156,16 +152,14 @@
     ];
 
     let currentMessageIndex = 0;
-
     const character   = document.getElementById('character');
     const messageBox  = document.getElementById('messageBox');
     const messageText = document.getElementById('messageText');
     const messageCount= document.getElementById('messageCount');
     const totalMessages = document.getElementById('totalMessages');
 
-    // 👉 Rendez la première phrase visible au chargement
+    // 👉 Afficher la première phrase dès le départ
     messageBox.classList.add('show');
-
     totalMessages.textContent = messages.length;
 
     function createSymbol() {
@@ -239,4 +233,3 @@
   </script>
 </body>
 </html>
-
