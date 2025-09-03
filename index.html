@@ -39,7 +39,7 @@ body {
     margin-top:20px;
     gap:20px; 
     flex-wrap:wrap;
-    position:relative; /* pour positionner la zone vocale à droite */
+    position:relative; /* pour placer la note vocale à droite */
 }
 
 .message {
@@ -60,7 +60,7 @@ body {
     display:flex; align-items:center; background:#e1ffc7; border-radius:25px;
     padding:10px 15px; box-shadow:0 3px 10px rgba(0,0,0,0.1);
     cursor:pointer; width:200px; transition:background 0.3s;
-    position:absolute; /* position par rapport à message-area */
+    position:absolute; /* par rapport à .message-area */
     top:0;
     left:calc(100% + 20px); /* à droite des messages */
 }
@@ -78,8 +78,8 @@ body {
 
 .counter {
     position:absolute; 
-    top:30px; 
-    right:-60px; 
+    top:50px; 
+    right:40px; 
     background: rgba(255, 255, 255, 0.8);
     padding: 10px 15px;
     border-radius: 20px;
@@ -95,13 +95,39 @@ body {
 .heart { position:absolute; font-size:20px; animation:floatHeart 3s ease-out forwards; pointer-events:none; }
 @keyframes floatHeart { 0%{opacity:1;transform:translateY(0) scale(0);} 20%{transform:translateY(-20px) scale(1);} 100%{opacity:0; transform:translateY(-100px) scale(0.5);} }
 
+/* 📱 Responsive pour mobile */
 @media(max-width:600px){
-    .character{width:200px;height:230px;}
-    .character-video{width:180px;height:180px;}
-    .message{max-width:90vw;padding:15px 20px;}
-    .message-text{font-size:16px;}
-    .voice-box{width:180px; left:calc(100% + 10px);}
-    .counter{top:5px; right:5px;}
+    .character {
+        width: 180px;
+        height: 200px;
+    }
+    .character-video {
+        width: 160px;
+        height: 160px;
+    }
+    .message-area {
+        flex-direction: column;  /* pile messages + vocal */
+        align-items: center;
+        gap: 15px;
+    }
+    .message {
+        max-width: 95vw;
+        padding: 15px 18px;
+        font-size: 16px;
+    }
+    .voice-box {
+        position: relative;   /* ne flotte plus à droite */
+        left: auto;
+        top: auto;
+        width: 90%;
+        max-width: 280px;
+    }
+    .counter {
+        top: 10px;
+        right: 15px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }
 </style>
 </head>
